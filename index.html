@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link
+         rel="icon"
+         type="image/x-icon"
+         href="./book-open-variant-outline.svg"
+         x />
+      <link rel="stylesheet" href="styles.css" />
+      <title>Library App</title>
+   </head>
+   <body>
+      <header>
+         <h1>My Library</h1>
+      </header>
+      <button id="openDialog"><strong>Add Book +</strong></button>
+      <div id="library"></div>
+
+      <dialog id="myDialog">
+         <header>
+            <h2>Add a new book</h2>
+            <button id="closeDialog"><strong>x</strong></button>
+         </header>
+         <div class="dialog-content">
+            <form>
+               <label for="title">Title:</label>
+               <input type="text" id="title" required />
+               <label for="author">Author:</label>
+               <input type="text" id="author" required />
+               <label for="pages">Pages:</label>
+               <input type="number" id="pages" required />
+               <label for="read">Read</label>
+               <input type="checkbox" id="read"/>
+               <button class="addBook" type="submit" formmethod="dialog">
+                  <strong>Add Book</strong>
+               </button>
+            </form>
+         </div>
+      </dialog>
+      <script src="script.js"></script>
+   </body>
+</html>

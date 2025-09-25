@@ -1,0 +1,175 @@
+@import "https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap";
+
+* {
+   margin: 0px;
+   padding: 0;
+   background-color: transparent;
+   box-sizing: border-box;
+   font-family: "Josefin Sans", sans-serif;
+}
+
+body {
+   background-color: rgb(255, 228, 193);
+}
+
+body h1 {
+   text-align: center;
+   color: rgb(255, 162, 0);
+   font-size: 40px;
+}
+
+header:first-of-type {
+   background-color: rgb(118, 80, 31);
+   padding: 30px;
+}
+
+header + button {
+   display: block;
+   margin: 20px auto;
+   padding: 20px;
+   border-radius: 10px;
+   border: 0;
+   font-size: 25px;
+   color: rgb(255, 228, 193);
+   background-color: rgb(139, 105, 59);
+   cursor: pointer;
+   transform: 0.01s ease;
+}
+
+header + button:hover {
+   background-color: rgb(114, 75, 24);
+   transform: translateY(-5px);
+}
+
+button:active {
+   background: rgb(82, 67, 49);
+   transform: translateY(0);
+}
+
+#library {
+   /* background-color: aliceblue; */
+   padding: 20px;
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+   gap: 100px;
+}
+
+#library > div {
+   padding: 20px;
+   border-radius: 15px;
+   background-color: rgb(139, 105, 59);
+   color: rgb(237, 201, 139);
+}
+
+#library > div > button {
+   margin: 20px auto;
+   padding: 20px;
+   border-radius: 10px;
+   border: 0;
+   font-size: 16px;
+   color: rgb(139, 105, 59);
+   background-color: rgb(255, 228, 193);
+   cursor: pointer;
+   transform: 0.01s ease;
+}
+
+#library > div > button:hover {
+   background-color: rgb(213, 159, 93);
+   transform: translateY(-5px);
+}
+
+#library > div > button:active {
+   background-color: rgb(188, 128, 51);
+   transform: translateY(0);
+}
+
+#library > div > h2 {
+   color: rgb(255, 162, 0);
+}
+
+#library > div > p {
+   font-size: 18px;
+   margin-top: 15px;
+}
+
+dialog {
+   /* display: none; */
+   background-color: rgb(118, 80, 31);
+   color: white;
+   border-radius: 20px;
+   border: 0;
+   margin: 15% auto;
+   height: 60%;
+   width: 30%;
+}
+
+dialog > header {
+   display: flex;
+   justify-content: space-between;
+}
+
+dialog > header > h2 {
+   padding: 20px 20px 0;
+   flex: 1;
+   text-align: center;
+   /* display: flex; */
+   /* justify-self: center; */
+}
+
+dialog > header > button {
+   border: 1px solid black;
+   height: 20px;
+   width: 20px;
+   border-radius: 60px;
+   background-color: rgb(106, 82, 48);
+   cursor: pointer;
+}
+
+.dialog-content {
+   /* display: grid; */
+   height: 55%;
+   padding: 15px;
+}
+
+#title,
+#author,
+#pages {
+   /* width: 100%; */
+   /* display: block; */
+   width: 100%;
+   height: 25px;
+   margin-bottom: 30px;
+   border-radius: 10px;
+   border: 1px solid rgb(255, 162, 0);
+   outline: none;
+   padding: 0 10px;
+}
+
+#read {
+   margin-bottom: 20px;
+}
+
+#title:focus,
+#author:focus,
+#pages:focus {
+   border: 1px solid rgb(0, 0, 0);
+   outline: none;
+}
+
+form > button {
+   display: block;
+   margin: 0 auto;
+   padding: 20px;
+   border-radius: 10px;
+   border: 2px solid rgb(107, 68, 0);
+   cursor: pointer;
+}
+
+form > button:hover {
+   background-color: rgb(127, 87, 35);
+   transform: translateY(0);
+}
+
+form > button:active {
+   color: rgb(223, 157, 42);
+}
