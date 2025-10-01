@@ -1,82 +1,86 @@
-const myLibrary = [];
+const libraryModule = (function () {
+   const myLibrary = [];
 
-function Book(title, author, pages, read) {
-   this.id = crypto.randomUUID();
-   this.title = title;
-   this.author = author;
-   this.pages = pages;
-   this.read = read;
-}
+   function createBook(title, author, pages, read) {
+      return {
+         id: crypto.randomUUID(),
+         title: title,
+         author: author,
+         pages: pages,
+         read: read,
+         toggleRead: function () {
+            this.read = !this.read;
+         },
+      };
+   }
 
-Book.prototype.toggleRead = function () {
-   this.read = !this.read;
-};
+   function addBookToLibrary(title, author, pages, read) {
+      const newBook = createBook(title, author, pages, read);
+      myLibrary.push(newBook);
+      displayBooks();
+   }
 
-function addBookToLibrary(title, author, pages, read) {
-   let book = new Book(title, author, pages, read);
-   myLibrary.push(book);
-   displayBooks();
-}
+   const libraryContainer = document.getElementById("library");
+   const myDialog = document.getElementById("myDialog");
+   const openButton = document.getElementById("openDialog");
+   const closeButton = document.getElementById("closeDialog");
+   const addBookButton = document.querySelector(".addBook");
+   const title = document.querySelector("#title");
+   const author = document.querySelector("#author");
+   const pages = document.querySelector("#pages");
+   const readStatus = document.querySelector("#read");
+   const form = document.querySelector("form");
 
-const libraryContainer = document.getElementById("library");
+   function displayBooks() {
+      libraryContainer.innerHTML = "";
+      myLibrary.forEach(book => {
+         const card = document.createElement("div");
+         card.classList.add("book-card");
+         card.innerHTML = `
+               <h1>${book.title}</h1>
+               <p>Author: ${book.author}</p>
+               <p>Pages: ${book.pages}</p>
+               <p>Status: ${book.read ? "Read" : "Not Read"}</p>
+               <button class="read-status"><strong>Toggle Read</strong></button>
+               <button class="remove"><strong>Remove</strong></button>`;
 
-function displayBooks() {
-   libraryContainer.innerHTML = "";
-   myLibrary.forEach(book => {
-      const card = document.createElement("div");
-      card.classList.add("book-card");
-      card.innerHTML = `
-      <h2>${book.title}</h2>
-      <p>Author: ${book.author}</p>
-      <p>Pages: ${book.pages}</p>
-      <p>Status: ${book.read ? "Read" : "Not Read"}</p>
-      <button class="read-status"><strong>Toggle Read</strong></button>
-      <button class="remove"><strong>Remove</strong></button>`;
+         const readStatusButton = card.querySelector(".read-status");
+         const removeButton = card.querySelector(".remove");
 
-      const readStatusButton = card.querySelector(".read-status");
-      const removeButton = card.querySelector(".remove");
+         readStatusButton.addEventListener("click", () => {
+            book.toggleRead();
+            displayBooks();
+         });
+         removeButton.addEventListener("click", () => {
+            const index = myLibrary.indexOf(book);
+            myLibrary.splice(index, 1);
+            displayBooks();
+         });
 
-      readStatusButton.addEventListener("click", () => {
-         book.toggleRead();
-         displayBooks();
+         libraryContainer.appendChild(card);
       });
-      removeButton.addEventListener("click", () => {
-         const index = myLibrary.indexOf(book);
-         //  if (index !== -1) {
-         myLibrary.splice(index, 1);
-         displayBooks();
-         //  }
-      });
+   }
 
-      libraryContainer.appendChild(card);
+   openButton.addEventListener("click", () => {
+      myDialog.showModal();
    });
-}
 
-const myDialog = document.getElementById("myDialog");
-const openButton = document.getElementById("openDialog");
-const closeButton = document.getElementById("closeDialog");
+   closeButton.addEventListener("click", () => {
+      myDialog.close();
+   });
 
-openButton.addEventListener("click", () => {
-   myDialog.showModal();
-});
+   addBookButton.addEventListener("click", e => {
+      e.preventDefault();
+      addBookToLibrary(
+         title.value,
+         author.value,
+         pages.value,
+         readStatus.checked
+      );
+      displayBooks();
+      form.reset();
+      myDialog.close();
+   });
 
-closeButton.addEventListener("click", () => {
-   myDialog.close();
-});
-
-const addBookButton = document.querySelector(".addBook");
-const title = document.querySelector("#title");
-const author = document.querySelector("#author");
-const pages = document.querySelector("#pages");
-const readStatus = document.querySelector("#read");
-
-addBookButton.addEventListener("click", e => {
-   e.preventDefault();
-   addBookToLibrary(title.value, author.value, pages.value, readStatus.checked);
-   displayBooks();
-   title.value = "";
-   author.value = "";
-   pages.value = "";
-   readStatus.checked = false;
-   myDialog.close();
-});
+   return { addBookToLibrary };
+})();
