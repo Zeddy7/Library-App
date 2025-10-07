@@ -1,21 +1,22 @@
 const libraryModule = (function () {
    const myLibrary = [];
 
-   function createBook(title, author, pages, read) {
-      return {
-         id: crypto.randomUUID(),
-         title: title,
-         author: author,
-         pages: pages,
-         read: read,
-         toggleRead: function () {
-            this.read = !this.read;
-         },
-      };
+   class Library {
+      constructor(title, author, pages, read) {
+         this.id = crypto.randomUUID();
+         this.title = title;
+         this.author = author;
+         this.pages = pages;
+         this.read = read;
+      }
+      
+      toggleRead() {
+         this.read = !this.read;
+      }
    }
 
    function addBookToLibrary(title, author, pages, read) {
-      const newBook = createBook(title, author, pages, read);
+      const newBook = new Library(title, author, pages, read);
       myLibrary.push(newBook);
       displayBooks();
    }
@@ -37,16 +38,14 @@ const libraryModule = (function () {
          const card = document.createElement("div");
          card.classList.add("book-card");
          card.innerHTML = `
-               <h1>${book.title}</h1>
-               <p>Author: ${book.author}</p>
-               <p>Pages: ${book.pages}</p>
-               <p>Status: ${book.read ? "Read" : "Not Read"}</p>
-               <button class="read-status"><strong>Toggle Read</strong></button>
-               <button class="remove"><strong>Remove</strong></button>`;
-
+         <h1>${book.title}</h1>
+         <p>Author: ${book.author}</p>
+         <p>Pages: ${book.pages}</p>
+         <p>Status: ${book.read ? "Read" : "Not Read"}</p>
+         <button class="read-status"><strong>Toggle Read</strong></button>
+         <button class="remove"><strong>Remove</strong></button>`;
          const readStatusButton = card.querySelector(".read-status");
          const removeButton = card.querySelector(".remove");
-
          readStatusButton.addEventListener("click", () => {
             book.toggleRead();
             displayBooks();
@@ -56,21 +55,18 @@ const libraryModule = (function () {
             myLibrary.splice(index, 1);
             displayBooks();
          });
-
          libraryContainer.appendChild(card);
       });
    }
-
    openButton.addEventListener("click", () => {
       myDialog.showModal();
    });
-
    closeButton.addEventListener("click", () => {
       myDialog.close();
    });
-
    addBookButton.addEventListener("click", e => {
-      e.preventDefault();
+      if ((!title.value, !author.value, !pages.value))
+         return e.preventDefault();
       addBookToLibrary(
          title.value,
          author.value,
@@ -81,6 +77,4 @@ const libraryModule = (function () {
       form.reset();
       myDialog.close();
    });
-
-   return { addBookToLibrary };
 })();
