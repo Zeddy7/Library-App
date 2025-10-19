@@ -85,13 +85,13 @@ button:active {
 #library > div > h1 {
    color: rgb(255, 162, 0);
    font-size: 32px;
-   word-wrap: break-word; 
+   word-wrap: break-word;
 }
 
 #library > div > p {
    font-size: 18px;
    margin-top: 15px;
-   word-wrap: break-word; 
+   word-wrap: break-word;
 }
 
 dialog {
@@ -136,9 +136,31 @@ dialog > header > button {
    height: 25px;
    margin-bottom: 30px;
    border-radius: 10px;
-   border: 1px solid rgb(255, 162, 0);
+   border: 2px solid rgb(255, 162, 0);
    outline: none;
    padding: 0 10px;
+}
+
+#title:invalid,
+#author:invalid,
+#pages:invalid {
+   outline: none;
+   border: 2px solid rgb(252, 71, 71);
+   background-color: rgb(252, 147, 147);
+}
+
+.error {
+   width: 100%;
+   padding: 0;
+   font-size: 80%;
+   color: white;
+   background-color: #990000;
+   border-radius: 0 0 5px 5px;
+   box-sizing: border-box;
+}
+
+.error.active {
+   padding: .4em;
 }
 
 #read {
